@@ -9,7 +9,7 @@ public class SystemController {
   private Grill grill;
   private Thermometer thermometer;
   private Phone phone;
-  private float maxDisturbance = 15.0f;
+  private float maxDisturbance = 30.0f;
   
   public SystemController() {
     this.phone = Phone.getInstance();
@@ -40,7 +40,6 @@ public class SystemController {
     float targetInternalTemp = profile.getTargetTemp();
     float targetFlipTemp = profile.getTargetFlipTemp();
 
-    float grillHeatAdjustLevel = this.thermometer.getGrillHeatAdjustLevel();
     float currentGrillTemp = this.grill.getGrillTemp();
 
     float randomHeatDisturbance = (float) (Math.random() - 0.5) * this.maxDisturbance;
@@ -52,11 +51,13 @@ public class SystemController {
         targetGrillTemp, targetInternalTemp, targetFlipTemp);
 
     System.out.printf("\nRandom temperature disturbance applied: %+4.1f°F%n\n", randomHeatDisturbance);
+
     this.grill.adjustHeat(randomHeatDisturbance);
-    this.grill.adjustHeatToTarget(targetGrillTemp, grillHeatAdjustLevel);
+    this.grill.adjustHeatToTarget(targetGrillTemp);
+
     System.out.printf("Grill temperature after update: %.1f°F%n", this.grill.getGrillTemp());
 
-    this.thermometer.updateInternalTemp(currentGrillTemp, targetInternalTemp, targetGrillTemp);
+    this.thermometer.updateInternalTemp(targetInternalTemp, targetGrillTemp);
     System.out.printf("Internal temperature after update: %.1f°F%n", this.thermometer.getInternalTemp());
 
     boolean flipAlert = thermometer.checkFlip(targetFlipTemp);

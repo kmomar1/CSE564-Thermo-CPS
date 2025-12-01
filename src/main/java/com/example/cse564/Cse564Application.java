@@ -23,8 +23,8 @@ public class Cse564Application {
 			try {
 				controller.simulateStep();
 
-				System.out.printf("Current Food Readiness Status: %s\n", phoneInstance.getReadyStatus());
-				System.out.printf("Current Food Flip Status: %s%n", phoneInstance.getFlipStatus());
+				System.out.printf("Current Food Readiness Status Notification: %s\n", phoneInstance.getReadyStatus());
+				System.out.printf("Current Food Flip Status Notification: %s%n", phoneInstance.getFlipStatus());
 
 				Thread.sleep(1000);
 			} 

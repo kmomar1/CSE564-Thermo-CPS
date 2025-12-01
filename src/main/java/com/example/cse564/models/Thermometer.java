@@ -5,8 +5,8 @@ public class Thermometer {
   private boolean isFlipped = false;
   private boolean isFoodReady = false;
   private float internalTemp = 0.0f;
-  private float internalHeatAdjustLevel = 0.1f;
-  private float grillHeatAdjustLevel = 0.05f;
+  private float internalHeatAdjustLevel = 0.02f;
+  private float internalGrillHeatAdjustLevel = 0.02f;
   
 
   private Thermometer() {}
@@ -23,16 +23,16 @@ public class Thermometer {
 
   public float getInternalHeatAdjustLevel() { return internalHeatAdjustLevel; }
 
-  public float getGrillHeatAdjustLevel() { return grillHeatAdjustLevel; }
+  public float getInternalGrillHeatAdjustLevel() { return internalGrillHeatAdjustLevel; }
 
   public boolean getIsFlipped() { return isFlipped; }
 
   public boolean getIsFoodReady() { return isFoodReady; }
 
 
-  public void updateInternalTemp(float grillTemp, float targetTemp, float targetGrillTemp) {
+  public void updateInternalTemp(float targetTemp, float targetGrillTemp) {
     float normalRate = (targetTemp - this.internalTemp) * this.internalHeatAdjustLevel;
-    float grillRate = (targetGrillTemp - grillTemp) * this.grillHeatAdjustLevel;
+    float grillRate = (targetGrillTemp - this.internalTemp) * this.internalGrillHeatAdjustLevel;
 
     internalTemp += normalRate + grillRate;
   }
