@@ -18,32 +18,18 @@ public class Thermometer {
     return instance;
   }
   
-  public boolean getIsFlipped() {
-    return isFlipped;
-  }
-  
-  public boolean getIsFoodReady() {
-    return isFoodReady;
-  }
-  
-  public float getInternalTemp() {
-    return internalTemp;
-  }
+  public boolean getIsFlipped() { return isFlipped; }
 
-  public void setIsFlipped(boolean isFlipped) {
-    this.isFlipped = isFlipped;
-  }
+  public boolean getIsFoodReady() { return isFoodReady; }
 
-  public void setIsFoodReady(boolean isFoodReady) {
-    this.isFoodReady = isFoodReady;
-  }
-  
-  public void increaseInternalTemp(float adjustLevel) {
-    this.internalTemp += adjustLevel;
-  }
-  
-  public void decreaseInternalTemp(float adjustLevel) {
-    this.internalTemp -= adjustLevel;
-  }
+  public float getInternalTemp() { return internalTemp; }
+
+  public void setIsFlipped(boolean isFlipped) { this.isFlipped = isFlipped; }
+
+  public void setIsFoodReady(boolean isFoodReady) { this.isFoodReady = isFoodReady; }
+
+  public void increaseInternalTemp(float adjustLevel) { this.internalTemp += adjustLevel; }
+
+  public void decreaseInternalTemp(float adjustLevel) { this.internalTemp -= adjustLevel; }
 }
 

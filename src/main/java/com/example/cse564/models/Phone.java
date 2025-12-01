@@ -16,15 +16,12 @@ public class Phone {
     return instance;
   }
   
-  public FoodProfile getSelectedFoodProfile() {
-    return selectedFoodProfile;
-  }
+  public FoodProfile getSelectedFoodProfile() { return selectedFoodProfile; }
   
-  public void setSelectedFoodProfile(FoodProfile profile) {
-    this.selectedFoodProfile = profile;
-  }
+  public void setSelectedFoodProfile(FoodProfile profile) { this.selectedFoodProfile = profile; }
   
   public void notifyFoodReadyStatus() {
+    
   }
   
   public void notifyFoodFlipStatus() {

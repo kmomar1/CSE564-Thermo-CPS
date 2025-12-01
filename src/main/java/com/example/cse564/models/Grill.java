@@ -16,30 +16,16 @@ public class Grill {
     return instance;
   }
   
-  public void turnGrillOn() {
-  }
-  
-  public void turnGrillOff() {
-  }
-  
-  public boolean getIsGrillOn() {
-    return grillOn;
-  }
-  
-  public float getIdleTemp() {
-    return idleTemp;
-  }
-  
-  public float getGrillTemp() {
-    return grillTemp;
-  }
-  
-  public void increaseGrillTemp(float adjustLevel) {
-    this.grillTemp += adjustLevel;
-  }
-  
-  public void decreaseGrillTemp(float adjustLevel) {
-    this.grillTemp -= adjustLevel;
-  }
+  public boolean getIsGrillOn() { return grillOn; }
+
+  public float getIdleTemp() { return idleTemp; }
+
+  public float getGrillTemp() { return grillTemp; }
+
+  public void setGrillOn(boolean grillOn) { this.grillOn = grillOn;}
+
+  public void increaseGrillTemp(float adjustLevel) { this.grillTemp += adjustLevel; }
+
+  public void decreaseGrillTemp(float adjustLevel) { this.grillTemp -= adjustLevel; }
 }
 

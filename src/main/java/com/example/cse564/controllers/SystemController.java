@@ -18,11 +18,11 @@ public class SystemController {
   
   public void startCooking(FoodProfile profile) {
     phone.setSelectedFoodProfile(profile);
-    grill.turnGrillOn();
+    grill.setGrillOn(true);
   }
   
   public void stopCooking() {
-    grill.turnGrillOff();
+    grill.setGrillOn(false);
   }
   
   public void simulateStep() {
