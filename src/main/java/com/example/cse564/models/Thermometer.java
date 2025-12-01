@@ -21,10 +21,6 @@ public class Thermometer {
 
   public float getInternalTemp() { return internalTemp; }
 
-  public float getInternalHeatAdjustLevel() { return internalHeatAdjustLevel; }
-
-  public float getInternalGrillHeatAdjustLevel() { return internalGrillHeatAdjustLevel; }
-
   public boolean getIsFlipped() { return isFlipped; }
 
   public boolean getIsFoodReady() { return isFoodReady; }

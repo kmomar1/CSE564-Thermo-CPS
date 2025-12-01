@@ -20,7 +20,7 @@ public class SystemController {
 
   public void startCooking(FoodProfile profile) {
     this.phone.setSelectedFoodProfile(profile);
-    this.grill.turnGrillOn(profile.getTargetGrillTemp());
+    this.grill.turnGrillOn();
   }
   
   public void stopCooking() {
@@ -49,7 +49,6 @@ public class SystemController {
         currentGrillTemp, this.thermometer.getInternalTemp());
     System.out.printf("Targets -> Grill: %.1f°F | Internal: %.1f°F | Flip: %.1f°F%n",
         targetGrillTemp, targetInternalTemp, targetFlipTemp);
-
     System.out.printf("\nRandom temperature disturbance applied: %+4.1f°F%n\n", randomHeatDisturbance);
 
     this.grill.adjustHeat(randomHeatDisturbance);

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.cse564.controllers.SystemController;
 import com.example.cse564.models.Phone;
 import com.example.cse564.models.Thermometer;
+import com.example.cse564.models.foodprofiles.ChickenProfile;
 import com.example.cse564.models.foodprofiles.SteakProfile;
 
 @SpringBootApplication
@@ -15,7 +16,8 @@ public class Cse564Application {
 		// SpringApplication.run(Cse564Application.class, args);
 		SystemController controller = new SystemController();
 		
-		controller.startCooking(new SteakProfile());
+		// controller.startCooking(new SteakProfile());
+		controller.startCooking(new ChickenProfile());
 
 		while (!Thermometer.getInstance().getIsFoodReady()) {
 			Phone phoneInstance = Phone.getInstance();

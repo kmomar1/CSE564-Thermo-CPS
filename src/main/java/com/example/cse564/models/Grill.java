@@ -33,7 +33,7 @@ public class Grill {
     this.adjustHeat(rate);
   }
   
-  public void turnGrillOn(float targetGrillTemp) { 
+  public void turnGrillOn() { 
     this.grillOn = true;
   }
 
