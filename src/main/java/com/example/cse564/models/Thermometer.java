@@ -1,15 +1,17 @@
 package com.example.cse564.models;
 
+import com.example.cse564.models.foodprofiles.FoodProfile;
+
 public class Thermometer {
   private static Thermometer instance;
   private boolean isFlipped = false;
   private boolean isFoodReady = false;
-  private float internalTemp = 0;
-  private float internalHeatAdjustLevel = 5.0f;
-  private float grillHeatAdjustLevel = 15.0f;
+  private float internalTemp = 0.0f;
+  private float internalHeatAdjustLevel = 0.1f;
+  private float grillHeatAdjustLevel = 0.05f;
   
-  private Thermometer() {
-  }
+
+  private Thermometer() {}
   
   public static Thermometer getInstance() {
     if (instance == null) {
@@ -17,19 +19,48 @@ public class Thermometer {
     }
     return instance;
   }
-  
-  public boolean getIsFlipped() { return isFlipped; }
 
-  public boolean getIsFoodReady() { return isFoodReady; }
 
   public float getInternalTemp() { return internalTemp; }
 
-  public void setIsFlipped(boolean isFlipped) { this.isFlipped = isFlipped; }
+  public float getInternalHeatAdjustLevel() { return internalHeatAdjustLevel; }
 
-  public void setIsFoodReady(boolean isFoodReady) { this.isFoodReady = isFoodReady; }
+  public float getGrillHeatAdjustLevel() { return grillHeatAdjustLevel; }
 
-  public void increaseInternalTemp(float adjustLevel) { this.internalTemp += adjustLevel; }
+  public boolean getIsFlipped() { return isFlipped; }
 
-  public void decreaseInternalTemp(float adjustLevel) { this.internalTemp -= adjustLevel; }
+  public boolean getIsFoodReady() { return isFoodReady; }
+  
+
+  public void updateInternalTemp(float grillTemp, FoodProfile profile) {
+    float normalRate = (profile.getTargetTemp() - this.internalTemp) * this.internalHeatAdjustLevel;
+    float grillRate = (grillTemp - profile.getTargetTemp()) * this.grillHeatAdjustLevel;
+
+    internalTemp += normalRate + grillRate;
+  }
+
+  public boolean checkFlip(FoodProfile profile) {
+    if (!isFlipped && this.internalTemp >= profile.getTargetFlipTemp()) {
+      isFlipped = true;
+      return true;
+    }
+
+    return false;
+  }
+
+  public boolean checkIsFoodReady(FoodProfile profile) {
+    if (!isFoodReady && this.internalTemp >= profile.getTargetTemp()) {
+      isFoodReady = true;
+      return true;
+    }
+
+    return false;
+  }
+
+  public void reset() {
+    this.isFlipped = false;
+    this.isFoodReady = false;
+    this.internalTemp = 0.0f;
+  }
 }
 

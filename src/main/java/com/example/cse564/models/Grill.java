@@ -6,8 +6,8 @@ public class Grill {
   private float idleTemp = 175.0f;
   private float grillTemp = 0.0f;
   
-  private Grill() {
-  }
+
+  private Grill() {}
   
   public static Grill getInstance() {
     if (instance == null) {
@@ -16,16 +16,28 @@ public class Grill {
     return instance;
   }
   
+
   public boolean getIsGrillOn() { return grillOn; }
 
   public float getIdleTemp() { return idleTemp; }
 
   public float getGrillTemp() { return grillTemp; }
 
-  public void setGrillOn(boolean grillOn) { this.grillOn = grillOn;}
+  public void adjustHeat(float adjustLevel) { this.grillTemp += adjustLevel; }
 
-  public void increaseGrillTemp(float adjustLevel) { this.grillTemp += adjustLevel; }
+  
+  public void turnGrillOn(float targetGrillTemp) { 
+    this.grillOn = true;
+    this.grillTemp = targetGrillTemp;
+  }
 
-  public void decreaseGrillTemp(float adjustLevel) { this.grillTemp -= adjustLevel; }
+  public void turnGrillOff(float targetGrillTemp) { 
+    this.grillOn = true;
+    this.grillTemp = 0.0f;
+  }
+
+  public void setGrillToIdle() {
+    this.grillTemp = this.idleTemp;
+  }
 }
 

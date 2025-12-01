@@ -13,20 +13,12 @@ public class FoodProfile {
     this.name = name;
   }
   
-  public float getTargetTemp() {
-    return targetTemp;
-  }
-  
-  public float getTargetGrillTemp() {
-    return targetGrillTemp;
-  }
-  
-  public float getTargetFlipTemp() {
-    return targetFlipTemp;
-  }
-  
-  public String getName() {
-    return name;
-  }
+  public float getTargetTemp() { return targetTemp; }
+
+  public float getTargetGrillTemp() { return targetGrillTemp; }
+
+  public float getTargetFlipTemp() { return targetFlipTemp; }
+
+  public String getName() { return name; }
 }
 
