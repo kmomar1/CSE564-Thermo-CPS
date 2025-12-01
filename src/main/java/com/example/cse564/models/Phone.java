@@ -21,11 +21,15 @@ public class Phone {
 
   public FoodProfile getSelectedFoodProfile() { return selectedFoodProfile; }
   
+  public String getReadyStatus() { return readyStatus; }
+
+  public String getFlipStatus() { return flipStatus; }
+
   public void setSelectedFoodProfile(FoodProfile profile) { this.selectedFoodProfile = profile; }
   
 
   public void notifyFoodReadyStatus(boolean alert) {
-    String foodIsReadyMessage = "Your " + selectedFoodProfile.getName() + "is ready";
+    String foodIsReadyMessage = "Your " + selectedFoodProfile.getName() + " is ready";
     String foodInProgressMessage = "Cooking in progress";
     
     this.readyStatus = alert ? foodIsReadyMessage : foodInProgressMessage;

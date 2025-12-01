@@ -31,6 +31,10 @@ public class SystemController {
   
   public void simulateStep() {
     FoodProfile profile = this.phone.getSelectedFoodProfile();
+    if (profile == null || !this.grill.getIsGrillOn()) {
+      System.out.println("Not cooking anything – skipping step.");
+      return;
+    }
 
     float targetGrillTemp = profile.getTargetGrillTemp();
     float targetInternalTemp = profile.getTargetTemp();
@@ -41,11 +45,19 @@ public class SystemController {
 
     float randomHeatDisturbance = (float) (Math.random() - 0.5) * this.maxDisturbance;
 
-    if (profile == null || !this.grill.getIsGrillOn()) return;
+    System.out.println("\n=== Simulation Step ===\n");
+    System.out.printf("Current grill temp -> %.1f°F | Internal temp: %.1f°F%n",
+        currentGrillTemp, this.thermometer.getInternalTemp());
+    System.out.printf("Targets -> Grill: %.1f°F | Internal: %.1f°F | Flip: %.1f°F%n",
+        targetGrillTemp, targetInternalTemp, targetFlipTemp);
 
+    System.out.printf("\nRandom temperature disturbance applied: %+4.1f°F%n\n", randomHeatDisturbance);
     this.grill.adjustHeat(randomHeatDisturbance);
     this.grill.adjustHeatToTarget(targetGrillTemp, grillHeatAdjustLevel);
+    System.out.printf("Grill temperature after update: %.1f°F%n", this.grill.getGrillTemp());
+
     this.thermometer.updateInternalTemp(currentGrillTemp, targetInternalTemp, targetGrillTemp);
+    System.out.printf("Internal temperature after update: %.1f°F%n", this.thermometer.getInternalTemp());
 
     boolean flipAlert = thermometer.checkFlip(targetFlipTemp);
     this.phone.notifyFoodFlipStatus(flipAlert);
@@ -53,7 +65,16 @@ public class SystemController {
     boolean foodReadyAlert = this.thermometer.checkIsFoodReady(targetInternalTemp);
     this.phone.notifyFoodReadyStatus(foodReadyAlert);
 
-    if (foodReadyAlert) this.grill.setGrillToIdle();
+    System.out.printf("\nFlip alert: %s | Ready alert: %s%n",
+        flipAlert ? "YES" : "NO", foodReadyAlert ? "YES" : "NO");
+
+    if (foodReadyAlert) {
+      this.grill.setGrillToIdle();
+
+      System.out.println("\nFood ready – grill will maintain idle temperature of " + this.grill.getIdleTemp() + " to keep food hot");
+    }
+
+    System.out.println();
   }
 }
 
