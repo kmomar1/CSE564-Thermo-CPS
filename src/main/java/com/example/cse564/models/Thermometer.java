@@ -1,7 +1,5 @@
 package com.example.cse564.models;
 
-import com.example.cse564.models.foodprofiles.FoodProfile;
-
 public class Thermometer {
   private static Thermometer instance;
   private boolean isFlipped = false;
