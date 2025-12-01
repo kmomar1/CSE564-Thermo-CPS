@@ -30,17 +30,17 @@ public class Thermometer {
   public boolean getIsFlipped() { return isFlipped; }
 
   public boolean getIsFoodReady() { return isFoodReady; }
-  
 
-  public void updateInternalTemp(float grillTemp, FoodProfile profile) {
-    float normalRate = (profile.getTargetTemp() - this.internalTemp) * this.internalHeatAdjustLevel;
-    float grillRate = (grillTemp - profile.getTargetTemp()) * this.grillHeatAdjustLevel;
+
+  public void updateInternalTemp(float grillTemp, float targetTemp, float targetGrillTemp) {
+    float normalRate = (targetTemp - this.internalTemp) * this.internalHeatAdjustLevel;
+    float grillRate = (targetGrillTemp - grillTemp) * this.grillHeatAdjustLevel;
 
     internalTemp += normalRate + grillRate;
   }
 
-  public boolean checkFlip(FoodProfile profile) {
-    if (!isFlipped && this.internalTemp >= profile.getTargetFlipTemp()) {
+  public boolean checkFlip(float targetFlipTemp) {
+    if (!isFlipped && this.internalTemp >= targetFlipTemp) {
       isFlipped = true;
       return true;
     }
@@ -48,8 +48,8 @@ public class Thermometer {
     return false;
   }
 
-  public boolean checkIsFoodReady(FoodProfile profile) {
-    if (!isFoodReady && this.internalTemp >= profile.getTargetTemp()) {
+  public boolean checkIsFoodReady(float targetTemp) {
+    if (!isFoodReady && this.internalTemp >= targetTemp) {
       isFoodReady = true;
       return true;
     }

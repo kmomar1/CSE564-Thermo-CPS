@@ -9,23 +9,51 @@ public class SystemController {
   private Grill grill;
   private Thermometer thermometer;
   private Phone phone;
+  private float maxDisturbance = 15.0f;
   
   public SystemController() {
+    this.phone = Phone.getInstance();
     this.grill = Grill.getInstance();
     this.thermometer = Thermometer.getInstance();
-    this.phone = Phone.getInstance();
   }
   
+
   public void startCooking(FoodProfile profile) {
-    phone.setSelectedFoodProfile(profile);
-    grill.setGrillOn(true);
+    this.phone.setSelectedFoodProfile(profile);
+    this.grill.turnGrillOn(profile.getTargetGrillTemp());
   }
   
   public void stopCooking() {
-    grill.setGrillOn(false);
+    this.phone.reset();
+    this.grill.turnGrillOff();
+    this.thermometer.reset();
   }
   
   public void simulateStep() {
+    FoodProfile profile = this.phone.getSelectedFoodProfile();
+
+    float targetGrillTemp = profile.getTargetGrillTemp();
+    float targetInternalTemp = profile.getTargetTemp();
+    float targetFlipTemp = profile.getTargetFlipTemp();
+
+    float grillHeatAdjustLevel = this.thermometer.getGrillHeatAdjustLevel();
+    float currentGrillTemp = this.grill.getGrillTemp();
+
+    float randomHeatDisturbance = (float) (Math.random() - 0.5) * this.maxDisturbance;
+
+    if (profile == null || !this.grill.getIsGrillOn()) return;
+
+    this.grill.adjustHeat(randomHeatDisturbance);
+    this.grill.adjustHeatToTarget(targetGrillTemp, grillHeatAdjustLevel);
+    this.thermometer.updateInternalTemp(currentGrillTemp, targetInternalTemp, targetGrillTemp);
+
+    boolean flipAlert = thermometer.checkFlip(targetFlipTemp);
+    this.phone.notifyFoodFlipStatus(flipAlert);
+
+    boolean foodReadyAlert = this.thermometer.checkIsFoodReady(targetInternalTemp);
+    this.phone.notifyFoodReadyStatus(foodReadyAlert);
+
+    if (foodReadyAlert) this.grill.setGrillToIdle();
   }
 }
 

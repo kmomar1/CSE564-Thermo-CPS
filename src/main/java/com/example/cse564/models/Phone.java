@@ -37,5 +37,11 @@ public class Phone {
 
     this.flipStatus = alert ? foodIsReadyMessage : foodInProgressMessage;
   }
+
+  public void reset() {
+    this.selectedFoodProfile = null;
+    this.readyStatus = "Idle";
+    this.flipStatus = "Idle";
+  }
 }
 

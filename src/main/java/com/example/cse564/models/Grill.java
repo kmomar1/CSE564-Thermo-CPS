@@ -25,14 +25,18 @@ public class Grill {
 
   public void adjustHeat(float adjustLevel) { this.grillTemp += adjustLevel; }
 
+
+  public void adjustHeatToTarget(float targetGrillTemp, float ratio) {
+    float rate = (targetGrillTemp - this.grillTemp) * ratio;
+    this.adjustHeat(rate);
+  }
   
   public void turnGrillOn(float targetGrillTemp) { 
     this.grillOn = true;
-    this.grillTemp = targetGrillTemp;
   }
 
-  public void turnGrillOff(float targetGrillTemp) { 
-    this.grillOn = true;
+  public void turnGrillOff() { 
+    this.grillOn = false;
     this.grillTemp = 0.0f;
   }
 
