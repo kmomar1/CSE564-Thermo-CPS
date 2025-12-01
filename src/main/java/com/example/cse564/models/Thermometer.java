@@ -1,11 +1,22 @@
 package com.example.cse564.models;
 
 public class Thermometer {
+  private static Thermometer instance;
   private boolean isFlipped = false;
   private boolean isFoodReady = false;
   private float internalTemp = 0;
   private float internalHeatAdjustLevel = 5.0f;
   private float grillHeatAdjustLevel = 15.0f;
+  
+  private Thermometer() {
+  }
+  
+  public static Thermometer getInstance() {
+    if (instance == null) {
+      instance = new Thermometer();
+    }
+    return instance;
+  }
   
   public boolean getIsFlipped() {
     return isFlipped;

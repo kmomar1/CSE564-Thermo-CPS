@@ -1,9 +1,20 @@
 package com.example.cse564.models;
 
 public class Grill {
+  private static Grill instance;
   private boolean grillOn = false;
   private float idleTemp = 175.0f;
   private float grillTemp = 0.0f;
+  
+  private Grill() {
+  }
+  
+  public static Grill getInstance() {
+    if (instance == null) {
+      instance = new Grill();
+    }
+    return instance;
+  }
   
   public void turnGrillOn() {
   }
